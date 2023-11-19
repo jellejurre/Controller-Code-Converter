@@ -13,7 +13,7 @@ Convert your Controller into a script that generates it!
 
 </div>
 
-## Features
+# Features
 Controller Code Converter is a tool to convert an Animator Controller into a script that will generate that controller.
 
 This is useful for when you want to automate setting up a controller, like when making a setup script that requires specific setup, but you don't want to write the hundreds of lines of code by hand.
