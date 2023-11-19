@@ -1,0 +1,93 @@
+﻿#if UNITY_EDITOR
+using System;
+using UnityEditor;
+using System.Collections.Generic;
+using UnityEditor.Animations;
+using UnityEngine;
+using System.Linq;
+using static [NAMESPACE].ControllerGenerationMethods;
+using VRC.SDK3.Avatars.Components;
+using VRC.SDKBase;
+using static VRC.SDKBase.VRC_AnimatorTrackingControl;
+using static VRC.SDKBase.VRC_AvatarParameterDriver;
+
+namespace [NAMESPACE]
+{
+	public class [CONTROLLERNAME]
+	{
+		public static Dictionary<string, object> objectCache;	
+	
+		private const string controllerName = "[CONTROLLERNAME]";
+		private const string controllerPath = "[CONTROLLERPATH]";
+		[MenuItem("Tools/Jellejurre/ControllerCodeConverter/Create/" + controllerName)]
+		public static void CreateController()
+		{
+			string animationsPath = controllerPath + "/Animations";
+			string maskPath =  controllerPath + "/Masks";
+			bool succeeded = false;
+			try {
+				
+				AssetDatabase.StartAssetEditing();
+				
+				foreach (string path in new[] { controllerPath, animationsPath, maskPath })
+				{
+					if (!System.IO.Directory.Exists(path + "/"))
+					{
+						System.IO.Directory.CreateDirectory(path);
+						AssetDatabase.ImportAsset(path);
+					}
+				}
+			
+				objectCache = new Dictionary<string, object>();
+				AnimatorControllerLayer[] layers = new AnimatorControllerLayer[]
+				{
+	//[LAYERCODE]
+				};
+	
+				AnimatorControllerParameter[] parameters = new AnimatorControllerParameter[]
+				{
+	//[PARAMETERCODE]
+				};
+	
+				AnimatorController controller = GenerateController(controllerName, layers, parameters);
+				AssetDatabase.CreateAsset(controller, $"{controllerPath}/{controllerName}.controller");
+				SerializeController(controller);
+				
+				List<AnimatorTransition> transitions = GenerateStateMachineTransitions();
+				foreach (var transition in transitions){
+					Add(controller, transition);
+				}
+							
+				foreach (var clip in controller.animationClips)
+				{
+					if (!AssetDatabase.IsMainAsset(clip)){
+						var uniqueFileName = AssetDatabase.GenerateUniqueAssetPath($"{controllerPath}/Animations/{clip.name}.anim");
+						AssetDatabase.CreateAsset(clip, uniqueFileName);
+					}
+				}
+				
+				foreach (var layer in controller.layers)
+				{
+					if (layer.avatarMask != null)
+					{
+						AssetDatabase.CreateAsset(layer.avatarMask, $"{controllerPath}/Masks/{layer.avatarMask.name}.mask");
+					}
+				}
+				
+				AssetDatabase.SaveAssets();
+				succeeded = true;
+			}
+			finally {
+				AssetDatabase.StopAssetEditing();
+			}
+			if(succeeded){
+				EditorUtility.DisplayDialog("Succeeded", $"Creating controller succeeded. you can find it at {controllerPath}/{controllerName}.controller", "Ok");
+			} else {
+				EditorUtility.DisplayDialog("Failed", $"Creating controller failed. please notify @jellejurre on discord about this", "Ok");
+			}
+		}
+		
+//[METHODCODE]
+	}
+}
+#endif

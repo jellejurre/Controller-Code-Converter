@@ -1,0 +1,16 @@
+{
+  "name" : "dev.jellejurre.controllercodeconverter",
+  "displayName" : "Controller Code Converter",
+  "version" : "1.0.0",
+  "unity" : "2019.4",
+  "description" : "A tool for converting Animator Controllers to Code.",
+  "author" : {
+    "name" : "Jelle",
+    "email" : "Jelle@jilles.com",
+    "url" : "https://jellejurre.dev"
+  },
+  "url" : "https://github.com/jellejurre/Controller-Code-Converter/releases/download/master/Controller_Code_Converter_main.zip",
+  "vpmDependencies" : {
+    "com.vrchat.avatars" : "*"
+  }
+}
