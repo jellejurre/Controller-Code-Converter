@@ -9,7 +9,6 @@
     "email" : "Jelle@jilles.com",
     "url" : "https://jellejurre.dev"
   },
-  "url" : "https://github.com/jellejurre/Controller-Code-Converter/releases/download/master/Controller_Code_Converter_main.zip",
   "vpmDependencies" : {
     "com.vrchat.avatars" : "*"
   }
