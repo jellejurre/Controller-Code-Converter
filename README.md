@@ -22,13 +22,13 @@ It has support for everything that VRChat uses, which includes SDK 3.0 State Beh
 
 # Usage
 - Import the latest unity package from the [Releases Page](https://github.com/jellejurre/Controller-Code-Converter/releases/latest)
-- Click Tools/Jellejurre/ControllerCodeConverter/Creator
+- In the toolbar, click Tools/Jellejurre/ControllerCodeConverter/Creator
 - Fill in the shown fields and select an output folder
 - Press the `Convert To Code` button
 
 This will generate two files in your output folder under a `/Code` subfolder. One of these is a helper file called "ControllerGenerationMethods" and one is your code file.
 
-You can run the code generation by clicking `Tools/jellejurre/ControllerCodeConverter/Create/[Your Controller Name]` and it will put the controller in your target folder.
+You can run the code generation by going to the toolbar and clicking `Tools/jellejurre/ControllerCodeConverter/Create/[Your Controller Name]` and it will put the controller in your target folder.
 
 # Sample Output
 After using Controller Code Converter on the sample VRChat IK Pose controller, the following output is generated:
